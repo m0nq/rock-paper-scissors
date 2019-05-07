@@ -10,7 +10,7 @@ app.set('x-powered-by', false);
 
 app.use(express.json());
 app.use(express.urlencoded({
-  extended: true,
+  extended: true
 }));
 
 // Specify node_modules location if not set from environment variables.
@@ -44,5 +44,20 @@ app.use((request, response, next) => {
 });
 
 app.use(require('./router'));
+
+app.use((request, response) => {
+  console.warn(new Date().toISOString(), request.method, request.originalUrl, '404');
+  return response.status(404).render('404', {
+    title: '404'
+  });
+});
+
+app.use((error, request, response, next) => {
+  if (response.headersSent) return next(error);
+  console.error(error);
+  return response.status(500).render('500', {
+    title: '500'
+  });
+});
 
 module.exports = app;

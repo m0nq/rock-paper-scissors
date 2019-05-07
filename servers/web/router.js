@@ -9,14 +9,14 @@ router.route('/')
   .get((request, response) =>
     Promise.all([
       gamesClient.fetch({ state: 'pending', limit: 3, order: 'asc' }),
-      gamesClient.fetch({ state: 'final', limit: 3, order: 'desc' }),
+      gamesClient.fetch({ state: 'final', limit: 3, order: 'desc' })
     ]).then(([pendingFetch, finalFetch]) => [
       pendingFetch.body,
-      finalFetch.body,
+      finalFetch.body
     ]).then(([pending, final]) => response.render('index', {
       title: 'Home',
       pending,
-      final,
+      final
     })));
 
 router.route('/games')
@@ -30,8 +30,9 @@ router.param('game_id', async (request, response, next, id) => {
 });
 
 router.route('/games/:game_id')
-  .get(async (request, response) => {
+  .get(async (request, response, next) => {
     const { body: rules } = await gamesClient.rules();
+    if (!request.game) return next();
 
     const messages = [];
     if (request.session.message) {
@@ -44,7 +45,7 @@ router.route('/games/:game_id')
       viewerPlayerId: request.session.playerId,
       game: request.game,
       rules,
-      messages,
+      messages
     });
   });
 
@@ -70,7 +71,7 @@ router.route('/games/:game_id/join')
   .post(async (request, response, next) => {
     if (isNull(request.game.player2id)) {
       const result = await gamesClient.update(request.game.id, {
-        player2id: request.session.playerId,
+        player2id: request.session.playerId
       });
       return response.redirect(`/games/${result.body.id}`);
     }
