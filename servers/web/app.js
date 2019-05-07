@@ -31,10 +31,8 @@ app.use('/popper/js', express.static(path.join(process.env.NODE_PATH, '/popper.j
 app.use(session);
 
 app.use(async (request, response, next) => {
-  if (request.session.playerId) {
-    return next();
-  }
-  const result = await playersClient.create();
+  if (request.session.playerId) return next();
+  const result = await playersClient.create(request.id);
   request.session.playerId = result.body.id;
   return next();
 });
