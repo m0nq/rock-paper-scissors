@@ -19,14 +19,12 @@
     "express",
     "game"
   ],
+  "author": "Monk Wellington <monk.wellington@gmail.com>",
   "eslintConfig": {
     "rules": {
-      "semi": [
-        "always"
-      ]
+      "semi": "off"
     }
   },
-  "author": "Monk Wellington <monk.wellington@gmail.com>",
   "contributors": [],
   "license": "ISC",
   "bugs": {
