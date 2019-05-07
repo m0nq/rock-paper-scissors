@@ -13,19 +13,26 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/fluxsauce/rock-paper-scissors.git"
+    "url": "git@github.com:m0nq/rock-paper-scissors.git"
   },
   "keywords": [
     "express",
     "game"
   ],
-  "author": "Jon Peck <jpeck@fluxsauce.com>",
+  "eslintConfig": {
+    "rules": {
+      "semi": [
+        "always"
+      ]
+    }
+  },
+  "author": "Monk Wellington <monk.wellington@gmail.com>",
   "contributors": [],
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.com/fluxsauce/rock-paper-scissors/issues"
+    "url": ""
   },
-  "homepage": "https://gitlab.com/fluxsauce/rock-paper-scissors#README",
+  "homepage": "",
   "dependencies": {
     "bootstrap": "^4.0.0",
     "connect-session-knex": "^1.4.0",
